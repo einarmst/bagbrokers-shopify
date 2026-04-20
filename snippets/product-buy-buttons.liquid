@@ -4,6 +4,16 @@
   {%- assign recipient_feature_active = true -%}
 {%- endif -%}
 
+{%- assign is_slependen_only = false -%}
+{%- assign _sv = product.selected_or_first_available_variant -%}
+{%- if _sv != nil and _sv.available == false -%}
+  {%- for _a in _sv.store_availabilities -%}
+    {%- if _a.location.id == 80466968812 and _a.available -%}
+      {%- assign is_slependen_only = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
 <div class="product-form__buy-buttons" {{ block.shopify_attributes }}>
   {%- if recipient_feature_active -%}
     <gift-card-recipient class="gift-card-recipient">
@@ -43,7 +53,9 @@
 
   <div class="product-form__payment-container">
     {%- if product.template_suffix != 'contact' -%}
-      {%- if product.selected_or_first_available_variant == nil -%}
+      {%- if is_slependen_only -%}
+        <a href="/pages/fysisk-butikk" class="product-form__add-button button button--secondary">Bare tilgjengelig i butikk – Slependen</a>
+      {%- elsif product.selected_or_first_available_variant == nil -%}
         <button type="button" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.unavailable' | t }}</button>
       {%- elsif product.selected_or_first_available_variant.available -%}
         {%- if product.template_suffix == 'pre-order' -%}
@@ -59,9 +71,11 @@
         <button type="submit" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.sold_out' | t }}</button>
       {%- endif -%}
 
-      {%- if block.settings.show_payment_button and recipient_feature_active == false and product.template_suffix != 'pre-order' -%}
-        {{ form | payment_button }}
-      {%- endif -%}
+      {%- unless is_slependen_only -%}
+        {%- if block.settings.show_payment_button and recipient_feature_active == false and product.template_suffix != 'pre-order' -%}
+          {{ form | payment_button }}
+        {%- endif -%}
+      {%- endunless -%}
     {%- else -%}
       <a href="mailto:{{ shop.email }}" class="button button--primary">{{ 'product.form.contact_us' | t }}</a>
     {%- endif -%}

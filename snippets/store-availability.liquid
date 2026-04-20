@@ -1,9 +1,19 @@
 {%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+{%- assign online_pick_up_count = 0 -%}
+{%- assign closest_location_set = false -%}
+{%- for _pa in pick_up_availabilities -%}
+  {%- unless _pa.location.id == 80466968812 -%}
+    {%- assign online_pick_up_count = online_pick_up_count | plus: 1 -%}
+    {%- unless closest_location_set -%}
+      {%- assign closest_location = _pa -%}
+      {%- assign closest_location_set = true -%}
+    {%- endunless -%}
+  {%- endunless -%}
+{%- endfor -%}
 
-<div class="store-availability-container" data-section-id="{{ section.id }}" data-section-type="store-availability" data-count="{{ pick_up_availabilities.size }}">
-  {%- if pick_up_availabilities.size > 0 -%}
+<div class="store-availability-container" data-section-id="{{ section.id }}" data-section-type="store-availability" data-count="{{ online_pick_up_count }}">
+  {%- if online_pick_up_count > 0 -%}
     <div class="store-availability-information">
-      {%- assign closest_location = pick_up_availabilities.first -%}
 
       {%- if closest_location.available -%}
         {%- render 'icon', icon: 'store-availability-in-stock' -%}
@@ -21,7 +31,7 @@
 
           <p class="store-availability-information__stores">
             <button type="button" class="store-availability-information__link link link--accented" data-action="open-modal" aria-controls="StoreAvailabilityModal-{{ product_variant.id }}">
-              {%- if pick_up_availabilities.size == 1 -%}
+              {%- if online_pick_up_count == 1 -%}
                 {{- 'store_availability.general.view_store_info' | t -}}
               {%- else -%}
                 {{- 'store_availability.general.check_other_stores' | t -}}
@@ -32,7 +42,7 @@
           <p class="store-availability-information__title text--strong">
             {{- 'store_availability.general.pick_up_unavailable_at' | t: location_name: closest_location.location.name -}}
           </p>
-          {%- if pick_up_availabilities.size > 1 -%}
+          {%- if online_pick_up_count > 1 -%}
             <p class="store-availability-information__stores">
               <button type="button" class="store-availability-information__link" data-action="open-modal" aria-controls="StoreAvailabilityModal-{{ product_variant.id }}">
                 {{- 'store_availability.general.check_other_stores' | t -}}
@@ -61,6 +71,7 @@
 
         <div class="store-availabilities-list modal__content">
           {%- for availability in pick_up_availabilities -%}
+            {%- unless availability.location.id == 80466968812 -%}
             <div class="store-availability-list__item">
               <p class="store-availability-list__location text--strong">{{ availability.location.name }}</p>
 
@@ -83,6 +94,7 @@
                 </div>
               </div>
             </div>
+            {%- endunless -%}
           {%- endfor -%}
         </div>
       </div>

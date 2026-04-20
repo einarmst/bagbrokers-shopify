@@ -293,6 +293,15 @@
           </a>
         </div>
       {%- else -%}
+        {%- assign item_slependen_only = false -%}
+        {%- assign _iv = product.selected_or_first_available_variant -%}
+        {%- if _iv != nil and product.available == false -%}
+          {%- for _ia in _iv.store_availabilities -%}
+            {%- if _ia.location.id == 80466968812 and _ia.available -%}
+              {%- assign item_slependen_only = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
         {%- capture quick_buy_form -%}
           {%- form 'product', product, id: form_id, class: product_form_classes -%}
             <input type="hidden" name="quantity" value="1">
@@ -308,7 +317,9 @@
               {%- assign quick_buy_classes = 'product-item__action-button product-item__action-button--list-view-only button button--small button--primary' -%}
             {%- endif -%}
 
-            {%- if product.available -%}
+            {%- if item_slependen_only -%}
+              <a href="{{ product.url }}" class="{{ quick_buy_classes | replace: 'button--primary', 'button--secondary' }}">Bare i butikk – Slependen</a>
+            {%- elsif product.available -%}
               {%- if product.variants.size == 1 -%}
                 <buy-button class="buy-button">
                   <button type="submit" class="{{ quick_buy_classes }}">
