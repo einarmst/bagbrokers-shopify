@@ -1,0 +1,24 @@
+{% assign vendor_collection_handle = vendor_name | handleize | strip | escape %}
+
+{% assign collection_match = False %}
+{% for collection in collections %}
+	{% if vendor_collection_handle == collection.handle %}
+		{% assign collection_match = collection %}
+	{% endif %}
+{% endfor %}
+
+{% assign vendor_match = False %}
+{% for vendor in shop.vendors %}
+	{% assign comparable_vendor_name = vendor | upcase %}
+	{% if comparable_vendor_name == vendor_name %}
+		{% assign vendor_match = vendor %}
+	{% endif %}
+{% endfor %}
+
+{% if collection_match %}
+	<li class="vendor-list-item"><a href="{{ collection_match.url }}">{{ vendor_name }}</a></li>
+{% elsif vendor_match %}
+	<li class="vendor-list-item">{{ vendor_match | link_to_vendor }}</li>
+{% else %}
+	<li class="vendor-list-item">{{ vendor_name }}</li>
+{% endif %}

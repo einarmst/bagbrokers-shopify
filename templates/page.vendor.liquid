@@ -1,0 +1,91 @@
+<div class="page-content page-full">
+
+
+  <div class="page-width">
+    <header class="section-header">
+      <h1 class="section-header__title" style="text-align: center;">{{ page.title }}</h1>
+    </header>
+  </div>
+  
+<div class="rte rte--nomargin">  
+{% comment %}
+<ul class="vendor-nav">  
+  {% assign current = "" %}
+  {% for product_vendor in shop.vendors %}  
+  {% assign first_letter = product_vendor | strip_html | upcase | truncate: 1, '' %}
+  
+  {% if first_letter != current %}
+  
+  <li><a href="#{{ first_letter }}">{{ first_letter }}</a></li>
+  
+  {% endif %}
+  
+  {% assign current = first_letter %}
+  {% endfor %}  
+</ul>
+{% endcomment %}  
+  
+  
+<div class="vendor-row">
+  <div>
+  {% assign current = "" %}
+
+    
+  {% assign newbrands = "Tumi" | split: ',' %}
+  {% assign hiddenbrands = "service" | split: ',' %}
+
+
+    
+  {% for product_vendor in shop.vendors %}
+  {% assign first_letter = product_vendor | strip_html | upcase | truncate: 1, '' %}
+   
+  {% if first_letter != current %}
+  
+  </div>
+  <a class="vendor-anchor" id="{{ first_letter }}"></a>
+  <div class="vendor-column enlarge-text">
+
+    
+  <li class="vendor-firstletter"><h1>{{ first_letter }}</h1></li>
+    <li class="vendor-name"><a href="/collections/{{ product_vendor | handleize }}">{{ product_vendor }}</a>
+    {% for new in newbrands %}
+    {% if new == product_vendor %}
+    <span style="color:#000;font-size:12px;font-weight:bold"> (kun i butikk)</span>
+    {% endif %}
+    {% endfor %}
+      
+    {% for hidden in hiddenbrands %}
+    {% if hidden == product_vendor %}
+    <span style="display: none;">test</span>
+    {% endif %}
+    {% endfor %}  
+      
+    </li>
+   
+  {% elsif first_letter == current %}
+    
+    <li class="vendor-name"><a href="/collections/{{ product_vendor | handleize }}">{%  unless product_vendor == 'service' %}{{ product_vendor | capitalize }}{% endunless %}</a>
+    {% for new in newbrands %}
+    {% if new == product_vendor %}
+    <span style="color;#000;font-size:12px;font-weight:bold"> (kun i butikk)</span>
+    {% endif %}
+    {% endfor %}
+      
+    {% for soon in soonbrands %}
+    {% if soon == product_vendor %}
+    <span style="color:#000;font-size:12px;font-weight:bold"> (coming soon)</span>
+    {% endif %}
+    {% endfor %}  
+      
+    </li>
+  
+  {% endif %}
+    
+  {% assign current = first_letter %}
+  {% endfor %}  
+</div>    
+</div>
+  
+  
+  </div>
+  </div>
