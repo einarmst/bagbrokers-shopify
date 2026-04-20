@@ -76,10 +76,7 @@ text-decoration: none!important;
 /* PRODUCT TRUST BADGES */
 
 .product-form__buy-buttons .product-usps {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-end !important;
-  gap: 12px;
+  text-align: right;
   margin-top: 28px;
   padding: 20px 0;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -89,9 +86,13 @@ text-decoration: none!important;
 .product-form__buy-buttons .product-usps__item {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.82em;
   opacity: 0.7;
+}
+
+.product-form__buy-buttons .product-usps__item + .product-usps__item {
+  margin-left: 20px;
 }
 
 .product-form__buy-buttons .product-usps__item svg {
