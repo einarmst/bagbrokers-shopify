@@ -75,27 +75,26 @@ text-decoration: none!important;
 
 /* PRODUCT TRUST BADGES */
 
-.product-usps {
-  margin-top: 28px !important;
-  padding: 20px 0 !important;
+.product-form__buy-buttons .product-usps {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 20px 0;
   border-top: 1px solid rgba(0,0,0,0.1);
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.product-usps__item {
-  display: flex !important;
+.product-form__buy-buttons .product-usps__item {
+  display: inline-flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
   gap: 8px;
   font-size: 0.82em;
   opacity: 0.7;
 }
 
-.product-usps__item + .product-usps__item {
-  margin-top: 12px !important;
-}
-
-.product-usps__item svg {
+.product-form__buy-buttons .product-usps__item svg {
   flex-shrink: 0;
 }
 
