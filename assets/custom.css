@@ -77,18 +77,23 @@ text-decoration: none!important;
 
 .product-trust-badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 24px;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0;
+  padding: 16px 0 12px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.product-form__buy-buttons .product-trust-badges {
   margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(0,0,0,0.08);
 }
 
 .product-trust-badges__item {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.8em;
+  gap: 8px;
+  font-size: 0.82em;
   opacity: 0.7;
 }
 
@@ -97,8 +102,7 @@ text-decoration: none!important;
 }
 
 .product-payment-icons {
-  margin-top: 12px;
-  padding-bottom: 4px;
+  margin-top: 14px;
   opacity: 0.75;
 }
 
