@@ -113,8 +113,6 @@ text-decoration: none!important;
 }
 
 .cart-recap__angrerett svg {
-  width: 16px !important;
-  height: 16px !important;
   flex-shrink: 0;
 }
 
