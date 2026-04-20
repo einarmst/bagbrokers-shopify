@@ -90,4 +90,22 @@
       {%- endunless -%}
     {%- endif -%}
   </div>
+
+  <div class="product-trust-badges">
+    <span class="product-trust-badges__item">
+      {%- render 'icon', icon: 'bi-returns' -%}
+      14 dagers angrerett
+    </span>
+    <span class="product-trust-badges__item">
+      {%- render 'icon', icon: 'bi-fast-delivery' -%}
+      Fri frakt over 999,-
+    </span>
+  </div>
+
+  <div class="product-payment-icons payment-list">
+    {{ 'vipps' | payment_type_svg_tag: class: 'payment-list__item' }}
+    {%- for type in shop.enabled_payment_types -%}
+      {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
+    {%- endfor -%}
+  </div>
 </div>

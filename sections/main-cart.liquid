@@ -463,6 +463,12 @@
 
                     <input type="hidden" name="attributes[collection_products_per_page]" value="">
                     <input type="hidden" name="attributes[collection_layout]" value="">
+
+                    <div class="cart-recap__angrerett">
+                      {%- render 'icon', icon: 'bi-returns' -%}
+                      <span>14 dagers angrerett</span>
+                    </div>
+
                     <button type="submit" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">{{ 'cart.general.checkout' | t }}</button>
                   </div>
                 </div>
@@ -472,6 +478,7 @@
                     <p class="cart-recap__secure-payment-title">{% render 'icon', icon: 'lock-2' %} {{ 'cart.general.secure_payments' | t }}</p>
 
                     <div class="cart-recap__secure-payment-list payment-list payment-list--centered">
+                      {{ 'vipps' | payment_type_svg_tag: class: 'payment-list__item' }}
                       {% for type in shop.enabled_payment_types %}
                         {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
                       {% endfor %}

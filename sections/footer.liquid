@@ -165,6 +165,7 @@
 
           {%- capture copyright_info -%}© {{ 'now' | date: '%Y' }} {{ shop.name }}{%- if section.settings.show_powered_by_shopify -%}<br>{{ powered_by_link }}{%- endif -%}{%- endcapture -%}
           <p class="hidden-pocket">{{ copyright_info }}</p>
+          <p class="footer__org-nr hidden-pocket">Org.nr: 911 87 8976 MVA</p>
         </div>
 
         {%- if section.settings.show_social_media -%}
@@ -190,6 +191,7 @@
             <p class="footer__aside-title">{{ 'footer.general.we_accept' | t }}</p>
 
             <div class="payment-list">
+              {{ 'vipps' | payment_type_svg_tag: class: 'payment-list__item' }}
               {% for type in shop.enabled_payment_types %}
                 {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
               {% endfor %}
@@ -199,6 +201,7 @@
 
         <div class="footer__aside-item footer__aside-item--copyright hidden-lap-and-up">
           <p>{{ copyright_info }}</p>
+          <p class="footer__org-nr">Org.nr: 911 87 8976 MVA</p>
         </div>
       </aside>
     </div>

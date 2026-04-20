@@ -71,3 +71,60 @@ text-decoration: none!important;
 .vendor-name:hover {
   color: darkgray!important;
 }
+
+
+/* PRODUCT TRUST BADGES */
+
+.product-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 14px;
+}
+
+.product-trust-badges__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.product-trust-badges__item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.product-payment-icons {
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* CART ANGRERETT BADGE */
+
+.cart-recap__angrerett {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+.cart-recap__angrerett svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+
+/* FOOTER ORG.NR */
+
+.footer__org-nr {
+  font-size: 0.75em;
+  opacity: 0.6;
+  margin-top: 4px;
+}
