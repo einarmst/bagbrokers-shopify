@@ -478,8 +478,8 @@
                     <p class="cart-recap__secure-payment-title">{% render 'icon', icon: 'lock-2' %} {{ 'cart.general.secure_payments' | t }}</p>
 
                     <div class="cart-recap__secure-payment-list payment-list payment-list--centered">
-                      {{ 'vipps' | payment_type_svg_tag: class: 'payment-list__item' }}
-                      {% for type in shop.enabled_payment_types %}
+                      {% assign enabled_payment_types = 'vipps,klarna,visa,master' | remove: ' ' | split: ',' %}
+                      {% for type in enabled_payment_types %}
                         {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
                       {% endfor %}
                     </div>

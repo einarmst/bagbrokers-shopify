@@ -191,8 +191,8 @@
             <p class="footer__aside-title">{{ 'footer.general.we_accept' | t }}</p>
 
             <div class="payment-list">
-              {{ 'vipps' | payment_type_svg_tag: class: 'payment-list__item' }}
-              {% for type in shop.enabled_payment_types %}
+              {% assign enabled_payment_types = 'vipps,klarna,visa,master' | remove: ' ' | split: ',' %}
+              {% for type in enabled_payment_types %}
                 {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
               {% endfor %}
             </div>
